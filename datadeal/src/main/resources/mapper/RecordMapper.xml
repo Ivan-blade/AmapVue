@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ivan.mapper.RecordMapper">
+
+    <select id="selectByIdAndTime" resultType="com.ivan.pojo.Record">
+     	 select * from record where id = #{id} and cur_time between #{curTime}-3*60 and #{curTime}+3*60
+    </select>
+
+    <select id="selectLimit" resultType="com.ivan.pojo.Record">
+        select * from record where id = #{id} limit 100
+    </select>
+    <select id="selectByDateAndTime" resultType="com.ivan.pojo.Record" parameterType="com.ivan.pojo.RecordInput">
+        select * from record where id = #{id} and cur_date = #{curDate} and cur_time between #{curTime} and #{endTime}
+    </select>
+    <select id="selectId" resultType="java.lang.String">
+        select distinct id from record;
+    </select>
+</mapper>
